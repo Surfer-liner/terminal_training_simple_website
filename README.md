@@ -1,4 +1,4 @@
-# My Simple Website
+# My Terminal Training Simple Website
 
 This is a simple website that allows users to explore different topics, leave comments, and interact with the site.
 
@@ -26,7 +26,7 @@ This is a simple website that allows users to explore different topics, leave co
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/Surfer-liner/my-simple-website.git
+   https://github.com/Surfer-liner/terminal_training_simple_website
 
 2. Install the required dependencies:
 
