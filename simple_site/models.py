@@ -3,23 +3,23 @@ from django.contrib.auth.models import User
 
 
 class Topic(models.Model):
-    '''Модель темы'''
+    '''Topic model'''
     topic = models.CharField(max_length = 200)
     date = models.DateTimeField(auto_now_add = True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        '''Возвращает строковое представление'''
+        '''Returns a string representation'''
         return self.topic
 
 
 class Comments(models.Model):
-    '''Комментарий пользователя'''
+    '''User's comment'''
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
     comment = models.TextField()
     date = models.DateTimeField(auto_now_add = True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        '''Возвращает строковое представление'''
+        '''Returns a string representation'''
         return self.comment

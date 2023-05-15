@@ -6,10 +6,12 @@ from django.http import Http404
 
 
 def home_page(request):
+    '''Directs to the home page'''
     return render(request, 'simple_site/home_page.html')
 
 
 def topics(request):
+    '''Directs to the topics page'''
     topics = Topic.objects.all()
     context = {'topics': topics}
     return render(request, 'simple_site/topics.html', context)
@@ -17,6 +19,7 @@ def topics(request):
 
 @login_required
 def topic(request, topic_id):
+    '''Directs to the topic page and shows a list of comments on the topic'''
     topic = Topic.objects.get(id=topic_id)
     comments = topic.comments_set.order_by('-date')
     if request.method != 'POST':
@@ -35,6 +38,7 @@ def topic(request, topic_id):
 
 @login_required
 def new_topic(request):
+    '''Page for creating a new theme'''
     if request.method != 'POST':
         form = TopicForm()
     else:
@@ -50,6 +54,7 @@ def new_topic(request):
 
 @login_required
 def delete_comment(request, comment_id):
+    '''Comment deletion function'''
     comment = Comments.objects.get(id=comment_id)
     topic_id = comment.topic.id
     comment.delete()
@@ -58,6 +63,7 @@ def delete_comment(request, comment_id):
 
 @login_required
 def comment_owner_checker(request, comment_id):
+    '''Checks whether the user from the request matches the comment creator'''
     comment = Comments.objects.get(id=comment_id)
     if comment.owner != request.user:
         raise Http404
@@ -67,6 +73,7 @@ def comment_owner_checker(request, comment_id):
 
 @login_required
 def topic_owner_checker(request, topic_id):
+    '''Checks whether the user from the request matches the topic creator'''
     topic = Topic.objects.get(id=topic_id)
     if topic.owner != request.user:
         raise Http404
@@ -76,6 +83,7 @@ def topic_owner_checker(request, topic_id):
 
 @login_required
 def edit_topic(request, topic_id):
+    '''Directs to the topic changes page'''
     topic = Topic.objects.get(id=topic_id)
     topic_owner_checker(request, topic_id)
     if request.method != 'POST':
@@ -91,6 +99,7 @@ def edit_topic(request, topic_id):
 
 @login_required
 def edit_comment(request, comment_id):
+    '''Directs to the comment changes page'''
     comment = Comments.objects.get(id=comment_id)
     topic = comment.topic
     comment_owner_checker(request, comment_id)
