@@ -18,7 +18,7 @@ def topics(request):
 @login_required
 def topic(request, topic_id):
     topic = Topic.objects.get(id=topic_id)
-    comments = topic.comments_set.order_by('date')
+    comments = topic.comments_set.order_by('-date')
     if request.method != 'POST':
         form = CommentForm()
     else:
