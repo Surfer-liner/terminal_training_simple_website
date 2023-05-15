@@ -26,7 +26,7 @@ This is a simple website that allows users to explore different topics, leave co
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/my-simple-website.git
+   git clone https://github.com/Surfer-liner/my-simple-website.git
 
 2. Install the required dependencies:
 
@@ -58,7 +58,7 @@ Contributions are welcome! If you find any issues or have suggestions, please op
 
 Massachusetts Institute of Technology License
 
-Copyright 2023 Surfer_Liner
+Copyright (c) 2023 Surfer_Liner
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
