@@ -1,0 +1,12 @@
+<a href="{% url 'simple_site:home_page' %}">Home page</a>
+<br><a href="{% url 'simple_site:topics' %}">Topics</a></br>
+{% if user.is_authenticated %}
+  Hello, {{ user.username }}
+  <br><a href="{% url 'users:logout' %}">Logout</a></br>
+{% else %}
+  <a href="{% url 'users:register' %}">Register</a>
+  <br><a href="{% url 'users:login' %}">Login</a></br>
+{% endif %}
+<br></br>
+
+{% block content %}{% endblock content  %}

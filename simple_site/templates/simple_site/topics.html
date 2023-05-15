@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <charset = 'UTF-8'>
+    <title>TOPICS</title>
+  </head>
+  <body>
+    {% extends 'simple_site/base.html' %}
+    
+    {% block content %}
+
+      <h1>Topics:</h1>
+      
+      {% for topic in topics %}
+        {% if topic.owner == request.user %}
+          <ul/>
+            <a href="{% url 'simple_site:topic' topic.id %}">{{ topic }}</a>
+            <a href="{% url 'simple_site:edit_topic' topic.id %}">edit topic</a>
+          </ul>
+        {% else %}
+          <ul>
+            <a href="{% url 'simple_site:topic' topic.id %}">{{ topic }}</a>
+          </ul>
+        {% endif %}
+      {% empty %}
+        No topic here.
+      {% endfor %}
+
+     <br><a href="{% url 'simple_site:new_topic' %}">Write new topic</a></br>
+
+    {% endblock content %}
+  </body>
+</html>

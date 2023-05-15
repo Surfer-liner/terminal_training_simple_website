@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <charset = "UTF-8">
+    <title>HOME PAGE</title>
+  </head>
+  <body>
+  {% extends 'simple_site/base.html' %}
+
+  {% block content %}
+
+    <h1> Love Micky and Robert and Oleg and Tanya!</h1>
+
+    <h2>Welcome to our website! This is a place where you can communicate freely without 
+worrying about information leaks. We provide a secure and private platform for our users 
+to connect and share information without any restrictions. Whether you are here to 
+collaborate on a project, connect with like-minded individuals, or simply chat with 
+friends, our website offers a safe and confidential environment to do so. So feel free to 
+join our community and start communicating today!</h2>
+
+    <h3><a href="{% url 'simple_site:topics' %}">Here</a> we can talking on any 
+themes</h3>
+
+  {% endblock content %}
+  </body>
+</html>

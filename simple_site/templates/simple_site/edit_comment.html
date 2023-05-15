@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EDIT COMMENT</title>
+</head>
+<body>
+{% extends 'simple_site/base.html' %}
+{% block content %}
+
+  <h2>Edit your comment here:</h2>
+
+  <form method="post" action="{% url 'simple_site:edit_comment' comment_id=comment.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">save changes</button>
+  </form>
+
+{% endblock content %}
+</body>
+</html>

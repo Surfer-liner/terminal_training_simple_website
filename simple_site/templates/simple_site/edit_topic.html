@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EDIT TOPIC</title>
+</head>
+<body>
+{% extends 'simple_site/base.html' %}
+{% block content %}
+
+  <h2>Edit topic: {{ topic }}</h2>
+
+  <form method="post" action="{% url 'simple_site:edit_topic' topic_id=topic.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">save changes</button>
+  </form>
+
+{% endblock content %}
+</body>
+</html>
