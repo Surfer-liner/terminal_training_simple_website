@@ -21,15 +21,21 @@
       <p>
       {% for comment in comments %}
         {% if comment.owner == request.user %}
+          ================================
           {{ comment.comment|linebreaks }}
+          ================================
           {{ comment.owner }}
           {{ comment.date|date:'H:i, M d' }}
           <a href="{% url 'simple_site:delete_comment' comment.id %}">delete comment</a>
           <a href="{% url 'simple_site:edit_comment' comment.id %}">edit comment</a>
+          --------------------------------
         {% else %}
+          ================================
           {{ comment.comment|linebreaks }}
+          ================================
           {{ comment.owner }}
           {{ comment.date|date:'H:i, M d' }}
+          --------------------------------
         {% endif %}
       {% empty %}
         No comments yet.
