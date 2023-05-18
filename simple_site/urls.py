@@ -14,4 +14,5 @@ urlpatterns = [
     path('edit_topic/<int:topic_id>', views.edit_topic, name='edit_topic'),
     path('edit_comment/<int:comment_id>', views.edit_comment,
          name='edit_comment'),
+    path('converter/', views.converter, name='converter'),
 ]

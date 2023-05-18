@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
-from .models import Topic, Comments
-from .forms import TopicForm, CommentForm
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
+from django.http import Http404, HttpResponse
+
+from .models import Topic, Comments, UploadFile
+from .forms import TopicForm, CommentForm, UploaFileForm
+
+from reportlab.pdfgen import canvas
+from io import BytesIO
 
 
 def home_page(request):
@@ -112,3 +116,48 @@ def edit_comment(request, comment_id):
         form = CommentForm(instance=comment)
     context = {'form': form, 'comment': comment}
     return render(request, 'simple_site/edit_comment.html', context)
+
+
+def converter(request):
+    '''Converting .txt to .pdf'''
+    if request.method == 'POST':
+        form = UploaFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            txt_file = request.FILES['upload_file']
+            txt_file_content = txt_file.read().decode('utf-8').split('\n')
+
+            buffer = BytesIO()
+            pdf = canvas.Canvas(buffer)
+            x = 60
+            y = 780
+            length = 90
+            pdf.setFont("Helvetica", 10)
+
+            # with open(txt_file.name, 'r') as f:
+            #     txt_file_content = f.readlines()
+
+            for string_inside in txt_file_content:
+                index = 0
+                if len(string_inside) >= length:
+                    strings_in_string_inside = round(len(string_inside) /
+                                                         length)
+                    for string in range(int(strings_in_string_inside)):
+                        string_to_print = string_inside[index:index + length]
+                        pdf.drawString(x, y, string_to_print.rstrip('\n'))
+                        index += length
+                        y -= 13
+                elif len(string_inside) < length:
+                    pdf.drawString(x, y, string_inside[:-1])
+                    y -= 13
+            pdf.save()
+
+            buffer.seek(0)
+
+            response = HttpResponse(buffer, content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; ' \
+                                              'filename="output.pdf"'
+            return response
+    else:
+        form = UploaFileForm()
+    context = {'form': form}
+    return render(request, 'simple_site/home_page.html', context)

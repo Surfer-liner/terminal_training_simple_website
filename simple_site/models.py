@@ -23,3 +23,9 @@ class Comments(models.Model):
     def __str__(self):
         '''Returns a string representation'''
         return self.comment
+
+
+class UploadFile(models.Model):
+    '''Save file in DB'''
+    upload_file = models.FileField(upload_to='uploads/')
+    upload_time = models.DateTimeField(auto_now_add=True)

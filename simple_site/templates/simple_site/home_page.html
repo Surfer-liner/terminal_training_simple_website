@@ -9,17 +9,25 @@
 
   {% block content %}
 
-    <h1> Love Micky and Robert and Oleg and Tanya!</h1>
+    <h2>
+      On this site you can write topics and told about it with another users.
+    </h2>
 
-    <h2>Welcome to our website! This is a place where you can communicate freely without 
-worrying about information leaks. We provide a secure and private platform for our users 
-to connect and share information without any restrictions. Whether you are here to 
-collaborate on a project, connect with like-minded individuals, or simply chat with 
-friends, our website offers a safe and confidential environment to do so. So feel free to 
-join our community and start communicating today!</h2>
+    <h3>
+      <a href="{% url 'simple_site:topics' %}">Here</a> we can talking on any
+      themes
+    </h3>
 
-    <h3><a href="{% url 'simple_site:topics' %}">Here</a> we can talking on any 
-themes</h3>
+    <h2>
+    Or use convertor .txt to .pdf below:
+    </h2>
+
+    <form action="{% url 'simple_site:converter' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="file" name="upload_file">
+      <button type="submit">Convert to PDF</button>
+    </form>
 
   {% endblock content %}
   </body>
